@@ -1,5 +1,8 @@
 # LibreNMS handler
 
+[![PyPI](https://img.shields.io/pypi/v/librenms-handler.svg)](https://pypi.python.org/pypi/librenms-handler)
+[![image](https://img.shields.io/pypi/pyversions/librenms-handler.svg)](https://python.org/pypi/librenms-handler)
+
 A Python library to interact with the LibreNMS API (v0).
 
 The project aims to provide the user with as much information as if they were looking at the [reference guide](https://docs.librenms.org/API/) themselves.
