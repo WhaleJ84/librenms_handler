@@ -143,14 +143,43 @@ class Devices(LibreNMS):
             verify=self.verify,
         )
 
-    # def _get_graph_generic_by_hostname(self, device: str, graph_type: str):
-    #     """
-    #
-    #     :param device:
-    #     :param graph_type:
-    #     """
-    #     pass
-    #
+    def get_graph_generic_by_hostname(  # pylint: disable=R0913
+        self,
+        device: str,
+        graph_type: str,
+        date_from: str = None,
+        date_to: str = None,
+        width: int = None,
+        height: int = None,
+        output: str = None,
+    ):
+        """
+        Get a specific graph for a device, this does not include ports.
+
+        :param device: Can be either device hostname or ID
+        :param graph_type: Type of graph to use. Use get_graphs() to see available graphs.
+        :param date_from: date you would like the graph to start
+        :param date_to: date you would like the graph to end
+        :param width: graph width, defaults to 1075.
+        :param height: graph height, defaults to 300.
+        :param output: how the graph should be outputted (base64, display), defaults to display.
+        """
+        parameters = dict(
+            {
+                "from": date_from,
+                "to": date_to,
+                "width": width,
+                "height": height,
+                "output": output,
+            }
+        )
+        return get(
+            f"{self.url}/{device}/{graph_type}",
+            parameters,
+            headers=self.headers,
+            verify=self.verify,
+        )
+
     # def _get_port_graphs(self, device: str):
     #     """
     #
