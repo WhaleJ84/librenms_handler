@@ -71,7 +71,7 @@ class Devices(LibreNMS):
         )
 
     def list_available_health_graphs(
-        self, device: str, health_type: str = None, sensor_id: str = None
+        self, device: str, health_type: str = None, sensor_id: int = None
     ):
         """
         This function allows to do three things:
@@ -99,45 +99,109 @@ class Devices(LibreNMS):
             f"{self.url}/{device}/health", headers=self.headers, verify=self.verify
         )
 
-    def _get_health_graph(self, device: str, health_type: str, sensor_id: str = None):
+    def get_health_graph(self, device: str, health_type: str, sensor_id: int = None):
         """
+        Get a particular health class graph for a device.
+        If you provide a sensor_id as well then a single sensor graph will be provided.
+        If no sensor_id value is provided then you will be sent a stacked sensor graph.
 
-        :param device:
-        :param health_type:
-        :param sensor_id:
+        :param device: Can be either device hostname or ID
+        :param health_type: Health graph as returned by list_available_health_graphs()
+        :param sensor_id: Optional sensor ID graph to return from health graph
         """
-        pass
+        if sensor_id:
+            return get(
+                f"{self.url}/{device}/graphs/health/{health_type}/{sensor_id}",
+                headers=self.headers,
+                verify=self.verify,
+            )
+        return get(
+            f"{self.url}/{device}/graphs/health/{health_type}",
+            headers=self.headers,
+            verify=self.verify,
+        )
 
-    def _get_wireless_graph(self, device: str, graph_type: str, senor_id: str = None):
+    def get_wireless_graph(self, device: str, graph_type: str, senor_id: int = None):
         """
+        Get a particular wireless class graph for a device.
+        If you provide a sensor_id as well then a single sensor graph will be provided.
+        If no sensor_id value is provided then you will be sent a stacked wireless graph.
 
-        :param device:
-        :param graph_type:
-        :param senor_id:
+        :param device: Can be either device hostname or ID
+        :param graph_type: Name of wireless graph as returned by list_available_wireless_graphs()
+        :param senor_id: Optional sensor ID graph to return from wireless sensor graph
         """
-        pass
+        if senor_id:
+            return get(
+                f"{self.url}/{device}/graphs/wireless/{graph_type}",
+                headers=self.headers,
+                verify=self.verify,
+            )
+        return get(
+            f"{self.url}/{device}/graphs/wireless/{graph_type}/{senor_id}",
+            headers=self.headers,
+            verify=self.verify,
+        )
 
-    def _get_graph_generic_by_hostname(self, device: str, graph_type: str):
+    def get_graph_generic_by_hostname(  # pylint: disable=R0913
+        self,
+        device: str,
+        graph_type: str,
+        date_from: str = None,
+        date_to: str = None,
+        width: int = None,
+        height: int = None,
+        output: str = None,
+    ):
         """
+        Get a specific graph for a device, this does not include ports.
 
-        :param device:
-        :param graph_type:
+        :param device: Can be either device hostname or ID
+        :param graph_type: Type of graph to use. Use get_graphs() to see available graphs.
+        :param date_from: date you would like the graph to start
+        :param date_to: date you would like the graph to end
+        :param width: graph width, defaults to 1075.
+        :param height: graph height, defaults to 300.
+        :param output: how the graph should be outputted (base64, display), defaults to display.
         """
-        pass
+        parameters = dict(
+            {
+                "from": date_from,
+                "to": date_to,
+                "width": width,
+                "height": height,
+                "output": output,
+            }
+        )
+        return get(
+            f"{self.url}/{device}/{graph_type}",
+            parameters,
+            headers=self.headers,
+            verify=self.verify,
+        )
 
-    def _get_port_graphs(self, device: str):
+    def get_port_graphs(self, device: str, columns: str = None):
         """
+        Get a list of ports for a particular device.
 
-        :param device:
+        :param device: Can be either the device hostname or ID
+        :param columns: Comma separated list of columns you want returned.
         """
-        pass
+        parameters = dict({"columns": columns})
+        return get(
+            f"{self.url}/{device}/ports",
+            parameters,
+            headers=self.headers,
+            verify=self.verify,
+        )
 
-    def _get_device_fdb(self, device: str):
+    def get_device_fdb(self, device: str):
         """
+        Get a list of FDB entries associated with a device.
 
-        :param device:
+        :param device: Can be either the device hostname or ID
         """
-        pass
+        return get(f"{self.url}/{device}/fdb", headers=self.headers, verify=self.verify)
 
     def get_device_ip_addresses(self, device: str):
         """
@@ -147,61 +211,61 @@ class Devices(LibreNMS):
         """
         return get(f"{self.url}/{device}/ip", headers=self.headers, verify=self.verify)
 
-    def _get_port_stack(self, device: str):
-        """
-
-        :param device:
-        """
-        pass
-
-    def _get_components(self, device: str):
-        """
-
-        :param device:
-        """
-        pass
-
-    def _add_components(self, device: str, component_type: str):
-        """
-
-        :param device:
-        :param component_type:
-        """
-        pass
-
-    def _edit_components(self, device: str):
-        """
-
-        :param device:
-        """
-        pass
-
-    def _delete_components(self, device: str, component: str):
-        """
-
-        :param device:
-        :param component:
-        """
-        pass
-
-    def _get_port_stats_by_port_hostname(self, device: str, interface_name: str):
-        """
-
-        :param device:
-        :param interface_name:
-        """
-        pass
-
-    def _get_graph_by_port_hostname(
-        self, device: str, interface_name: str, port_type: str
-    ):
-        """
-
-        :param device:
-        :param interface_name:
-        :param port_type:
-        """
-        pass
+    # def _get_port_stack(self, device: str):
+    #     """
+    #
+    #     :param device:
+    #     """
+    #     pass
+    #
+    # def _get_components(self, device: str):
+    #     """
+    #
+    #     :param device:
+    #     """
+    #     pass
+    #
+    # def _add_components(self, device: str, component_type: str):
+    #     """
+    #
+    #     :param device:
+    #     :param component_type:
+    #     """
+    #     pass
+    #
+    # def _edit_components(self, device: str):
+    #     """
+    #
+    #     :param device:
+    #     """
+    #     pass
+    #
+    # def _delete_components(self, device: str, component: str):
+    #     """
+    #
+    #     :param device:
+    #     :param component:
+    #     """
+    #     pass
+    #
+    # def _get_port_stats_by_port_hostname(self, device: str, interface_name: str):
+    #     """
+    #
+    #     :param device:
+    #     :param interface_name:
+    #     """
+    #     pass
+    #
+    # def _get_graph_by_port_hostname(
+    #     self, device: str, interface_name: str, port_type: str
+    # ):
+    #     """
+    #
+    #     :param device:
+    #     :param interface_name:
+    #     :param port_type:
+    #     """
+    #     pass
 
     def list_locations(self):
         """Return a list of locations."""
@@ -311,68 +375,68 @@ class Devices(LibreNMS):
         )
         return post(self.url, json=data, headers=self.headers, verify=self.verify)
 
-    def _list_oxidized(self, device: str):
-        """
-        List devices for use with Oxidized.
-        If you have group support enabled then a group will also be returned based on your config.
-
-        :param device:
-        """
-        pass
-
-    def _update_device_field(self, device: str):
-        """
-        Updates devices field in the database.
-
-        :param device:
-        """
-        pass
-
-    def _rename_device(self, device: str, new_hostname: str):
-        """
-        Rename device.
-
-        :param device:
-        :param new_hostname:
-        """
-        pass
-
-    def _get_device_groups(self, device: str):
-        """
-        List the device groups that a device is matched on.
-
-        :param device:
-        """
-        pass
-
-    def _search_oxidized(self, search_string: str):
-        """
-        Search all oxidized device configs for a string.
-
-        :param search_string:
-        """
-        pass
-
-    def _get_oxidized_config(self, device_name: str):
-        """
-        Returns a specific device's config from oxidized.
-
-        :param device_name:
-        """
-        pass
-
-    def _add_parents_to_host(self, device: str):
-        """
-        Add one or more parents to host.
-
-        :param device:
-        """
-        pass
-
-    def _delete_parents_from_host(self, device: str):
-        """
-        Deletes some or all of the parents from a host.
-
-        :param device:
-        """
-        pass
+    # def _list_oxidized(self, device: str):
+    #     """
+    #     List devices for use with Oxidized.
+    #     If you have group support enabled then a group will also be returned based on your config.
+    #
+    #     :param device:
+    #     """
+    #     pass
+    #
+    # def _update_device_field(self, device: str):
+    #     """
+    #     Updates devices field in the database.
+    #
+    #     :param device:
+    #     """
+    #     pass
+    #
+    # def _rename_device(self, device: str, new_hostname: str):
+    #     """
+    #     Rename device.
+    #
+    #     :param device:
+    #     :param new_hostname:
+    #     """
+    #     pass
+    #
+    # def _get_device_groups(self, device: str):
+    #     """
+    #     List the device groups that a device is matched on.
+    #
+    #     :param device:
+    #     """
+    #     pass
+    #
+    # def _search_oxidized(self, search_string: str):
+    #     """
+    #     Search all oxidized device configs for a string.
+    #
+    #     :param search_string:
+    #     """
+    #     pass
+    #
+    # def _get_oxidized_config(self, device_name: str):
+    #     """
+    #     Returns a specific device's config from oxidized.
+    #
+    #     :param device_name:
+    #     """
+    #     pass
+    #
+    # def _add_parents_to_host(self, device: str):
+    #     """
+    #     Add one or more parents to host.
+    #
+    #     :param device:
+    #     """
+    #     pass
+    #
+    # def _delete_parents_from_host(self, device: str):
+    #     """
+    #     Deletes some or all of the parents from a host.
+    #
+    #     :param device:
+    #     """
+    #     pass
