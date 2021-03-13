@@ -99,15 +99,28 @@ class Devices(LibreNMS):
             f"{self.url}/{device}/health", headers=self.headers, verify=self.verify
         )
 
-    # def _get_health_graph(self, device: str, health_type: str, sensor_id: str = None):
-    #     """
-    #
-    #     :param device:
-    #     :param health_type:
-    #     :param sensor_id:
-    #     """
-    #     pass
-    #
+    def get_health_graph(self, device: str, health_type: str, sensor_id: str = None):
+        """
+        Get a particular health class graph for a device.
+        If you provide a sensor_id as well then a single sensor graph will be provided.
+        If no sensor_id value is provided then you will be sent a stacked sensor graph.
+
+        :param device: Can be either device hostname or ID
+        :param health_type: Health graph as returned by list_available_health_graphs()
+        :param sensor_id: Optional sensor ID graph to return from health graph
+        """
+        if sensor_id:
+            return get(
+                f"{self.url}/{device}/graphs/health/{health_type}/{sensor_id}",
+                headers=self.headers,
+                verify=self.verify,
+            )
+        return get(
+            f"{self.url}/{device}/graphs/health/{health_type}",
+            headers=self.headers,
+            verify=self.verify,
+        )
+
     # def _get_wireless_graph(self, device: str, graph_type: str, senor_id: str = None):
     #     """
     #
