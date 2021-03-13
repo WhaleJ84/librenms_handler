@@ -2,6 +2,7 @@
 
 [![PyPI](https://img.shields.io/pypi/v/librenms-handler.svg)](https://pypi.python.org/pypi/librenms-handler)
 [![image](https://img.shields.io/pypi/pyversions/librenms-handler.svg)](https://python.org/pypi/librenms-handler)
+[![Black](https://img.shields.io/badge/code%20style-black-000000.svg)](https://github.com/psf/black)
 [![Pylint](https://github.com/WhaleJ84/librenms_handler/workflows/Pylint/badge.svg)](https://github.com/WhaleJ84/librenms-handler/actions?query=workflow%3APylint)
 
 A Python library to interact with the LibreNMS API (v0).
