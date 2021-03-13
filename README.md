@@ -9,7 +9,7 @@ The project aims to provide the user with as much information as if they were lo
 
 ## Usage
 
-THe package is installed via Pip with `pip install librenms-handler`.
+The package is installed via Pip with `pip install librenms-handler`.
 
 The following statement will initialise the library:
 
