@@ -135,12 +135,12 @@ class Devices(LibreNMS):
             return get(
                 f"{self.url}/{device}/graphs/wireless/{graph_type}",
                 headers=self.headers,
-                verify=self.verify
+                verify=self.verify,
             )
         return get(
             f"{self.url}/{device}/graphs/wireless/{graph_type}/{senor_id}",
             headers=self.headers,
-            verify=self.verify
+            verify=self.verify,
         )
 
     # def _get_graph_generic_by_hostname(self, device: str, graph_type: str):
