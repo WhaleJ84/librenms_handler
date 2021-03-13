@@ -23,9 +23,9 @@ jobs:
         with:
           python-version: '3.x'
 
-      - name: Install pylint
+      - name: Install requirements
         run: |
-          pip install --upgrade pip
-          pip install pylint
+          pip install requests pylint
+
       - name: Run pylint
         run: pylint src/librenms_handler
