@@ -180,13 +180,21 @@ class Devices(LibreNMS):
             verify=self.verify,
         )
 
-    # def _get_port_graphs(self, device: str):
-    #     """
-    #
-    #     :param device:
-    #     """
-    #     pass
-    #
+    def get_port_graphs(self, device: str, columns: str = None):
+        """
+        Get a list of ports for a particular device.
+
+        :param device: Can be either the device hostname or ID
+        :param columns: Comma separated list of columns you want returned.
+        """
+        parameters = dict({"columns": columns})
+        return get(
+            f"{self.url}/{device}/ports",
+            parameters,
+            headers=self.headers,
+            verify=self.verify,
+        )
+
     # def _get_device_fdb(self, device: str):
     #     """
     #
