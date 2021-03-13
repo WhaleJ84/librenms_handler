@@ -49,20 +49,21 @@ The handler first checks for the following environment variables, should you cho
 ## Endpoints
 
 While I will likely never have reason to fully complete all endpoints, the progress of such is shown below:
+See [Projects](https://github.com/WhaleJ84/librenms_handler/projects) to track the progress of the endpoints.
 
-| Endpoint      | Started | Methods |
-| ------------- | ------- | ------- |
-| Alerts        | False   |         |
-| ARP           | False   |         |
-| Bills         | False   |         |
-| Device Groups | False   |         |
-| Devices       | True    | 12/32   |
-| Inventory     | False   |         |
-| Locations     | False   |         |
-| Logs          | False   |         |
-| Port Groups   | False   |         |
-| Ports         | False   |         |
-| Routing       | False   |         |
-| Services      | False   |         |
-| Switching     | False   |         |
-| System        | False   |         |
+| Endpoint      | Started | Done  |
+| ------------- | ------- | ----- |
+| Alerts        | False   |       |
+| ARP           | False   |       |
+| Bills         | False   |       |
+| Device Groups | False   |       |
+| Devices       | True    | False |
+| Inventory     | False   |       |
+| Locations     | False   |       |
+| Logs          | False   |       |
+| Port Groups   | False   |       |
+| Ports         | False   |       |
+| Routing       | False   |       |
+| Services      | False   |       |
+| Switching     | False   |       |
+| System        | False   |       |
