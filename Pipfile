@@ -9,6 +9,9 @@ requests = "*"
 [dev-packages]
 pylint = "*"
 black = "*"
+twine = "*"
+build = "*"
+setuptools = "*"
 
 [requires]
 python_version = "3.8"
