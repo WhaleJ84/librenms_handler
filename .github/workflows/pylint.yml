@@ -1,0 +1,31 @@
+name: Pylint
+'on':
+  pull_request:
+  push:
+    branches:
+      - main
+      - ci-test
+jobs:
+  test:
+    name: Pylint
+    runs-on: ubuntu-latest
+    strategy:
+      matrix:
+        distro:
+          - ubuntu2004
+
+    steps:
+      - name: Checkout code
+        uses: actions/checkout@v2
+
+      - name: Set up Python3
+        uses: actions/setup-python@v2
+        with:
+          python-version: '3.x'
+
+      - name: Install pylint
+        run: |
+          pip install --upgrade pip
+          pip install pylint
+      - name: Run pylint
+        run: pylint src/librenms_handler
