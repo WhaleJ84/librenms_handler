@@ -195,12 +195,13 @@ class Devices(LibreNMS):
             verify=self.verify,
         )
 
-    # def _get_device_fdb(self, device: str):
-    #     """
-    #
-    #     :param device:
-    #     """
-    #     pass
+    def get_device_fdb(self, device: str):
+        """
+        Get a list of FDB entries associated with a device.
+
+        :param device: Can be either the device hostname or ID
+        """
+        return get(f"{self.url}/{device}/fdb", headers=self.headers, verify=self.verify)
 
     def get_device_ip_addresses(self, device: str):
         """
