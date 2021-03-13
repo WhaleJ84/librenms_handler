@@ -1,12 +1,16 @@
 # LibreNMS handler
 
+[![PyPI](https://img.shields.io/pypi/v/librenms-handler.svg)](https://pypi.python.org/pypi/librenms-handler)
+[![image](https://img.shields.io/pypi/pyversions/librenms-handler.svg)](https://python.org/pypi/librenms-handler)
+[![Pylint](https://github.com/WhaleJ84/librenms_handler/workflows/Pylint/badge.svg)](https://github.com/WhaleJ84/librenms-handler/actions?query=workflow%3APylint)
+
 A Python library to interact with the LibreNMS API (v0).
 
 The project aims to provide the user with as much information as if they were looking at the [reference guide](https://docs.librenms.org/API/) themselves.
 
 ## Usage
 
-THe package is installed via Pip with `pip install librenms-handler`.
+The package is installed via Pip with `pip install librenms-handler`.
 
 The following statement will initialise the library:
 
