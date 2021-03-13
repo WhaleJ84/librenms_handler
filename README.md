@@ -15,7 +15,7 @@ librenms_devices = Devices(
 )
 ```
 
-Once done, a list of methods will be available to you such as `connection.list_devices()`.
+Once done, a list of methods will be available to you such as `librenms_handler.list_devices()`.
 Upon operation, the method will execute and return the required request to your LibreNMS instance.
 
 ```
