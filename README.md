@@ -2,7 +2,11 @@
 
 A Python library to interact with the LibreNMS API (v0).
 
+The project aims to provide the user with as much information as if they were looking at the [reference guide](https://docs.librenms.org/API/) themselves.
+
 ## Usage
+
+THe package is installed via Pip with `pip install librenms-handler`.
 
 The following statement will initialise the library:
 
@@ -14,6 +18,8 @@ librenms_devices = Devices(
     'e4ef9234abab59a90628dd3f616a60b4'
 )
 ```
+
+**NOTE:** If you are using a self-signed certificate for your server, you can bypass the errors by passing the initialisation option `verify=False`.
 
 Once done, a list of methods will be available to you such as `librenms_handler.list_devices()`.
 Upon operation, the method will execute and return the required request to your LibreNMS instance.
