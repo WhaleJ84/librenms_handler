@@ -1,10 +1,10 @@
 """Includes all the methods available to the Devices endpoint."""
-from requests import delete, get, post
+from requests import delete, get, post, put
 
 from librenms_handler import LibreNMS
 
 
-class Devices(LibreNMS):
+class Devices(LibreNMS):  # pylint: disable=R0904
     """Includes all the methods available to the Devices endpoint."""
 
     def __init__(self, url=None, token=None, verify=True):
@@ -304,13 +304,48 @@ class Devices(LibreNMS):
             verify=self.verify,
         )
 
-    # def _edit_components(self, device: str):
-    #     """
-    #
-    #     :param device:
-    #     """
-    #     pass
-    #
+    def edit_components(  # pylint: disable=R0913
+        self,
+        device: str,
+        component_id: int,
+        component_type: str = None,
+        label: str = None,
+        status: int = None,
+        ignore: int = None,
+        disabled: int = None,
+        error: str = None,
+    ):
+        """
+        Edit an existing component on a particular device.
+
+        :param device: Can be either the decice hostname or ID
+        :param component_id:
+        :param component_type:
+        :param label:
+        :param status:
+        :param ignore:
+        :param disabled:
+        :param error:
+        """
+        data = dict(
+            {
+                component_id: {
+                    "type": component_type,
+                    "label": label,
+                    "status": status,
+                    "ignore": ignore,
+                    "disabled": disabled,
+                    "error": error,
+                }
+            }
+        )
+        return put(
+            f"{self.url}/{device}/components",
+            data,
+            headers=self.headers,
+            verify=self.verify,
+        )
+
     # def _delete_components(self, device: str, component: str):
     #     """
     #
