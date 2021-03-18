@@ -1,10 +1,10 @@
 """Includes all the methods available to the Devices endpoint."""
-from requests import delete, get, post
+from requests import delete, get, post, put
 
 from librenms_handler import LibreNMS
 
 
-class Devices(LibreNMS):
+class Devices(LibreNMS):  # pylint: disable=R0904
     """Includes all the methods available to the Devices endpoint."""
 
     def __init__(self, url=None, token=None, verify=True):
@@ -97,6 +97,37 @@ class Devices(LibreNMS):
             )
         return get(
             f"{self.url}/{device}/health", headers=self.headers, verify=self.verify
+        )
+
+    def list_available_wireless_graphs(
+        self, device: str, wireless_type: str = None, sensor_id: int = None
+    ):
+        """
+        This function allows to do three things:
+         - Get a list of overall wireless graphs available.
+         - Get a list of wireless graphs based on provided class.
+         - Get the wireless sensors information based on ID.
+
+        :param device: Can be either device hostname or ID
+        :param wireless_type: Optional wireless type / wireless class
+        :param sensor_id:a Optional sensor ID to retrieve specific information
+        """
+        if wireless_type:
+            if sensor_id:
+                return get(
+                    f"{self.url}/{device}/wireless/{wireless_type}/{sensor_id}",
+                    headers=self.headers,
+                    verify=self.verify,
+                )
+            return get(
+                f"{self.url}/{device}/wireless/{wireless_type}",
+                headers=self.headers,
+                verify=self.verify,
+            )
+        return get(
+            f"{self.url}/{device}/wireless",
+            headers=self.headers,
+            verify=self.verify,
         )
 
     def get_health_graph(self, device: str, health_type: str, sensor_id: int = None):
@@ -211,61 +242,183 @@ class Devices(LibreNMS):
         """
         return get(f"{self.url}/{device}/ip", headers=self.headers, verify=self.verify)
 
-    # def _get_port_stack(self, device: str):
-    #     """
-    #
-    #     :param device:
-    #     """
-    #     pass
-    #
-    # def _get_components(self, device: str):
-    #     """
-    #
-    #     :param device:
-    #     """
-    #     pass
-    #
-    # def _add_components(self, device: str, component_type: str):
-    #     """
-    #
-    #     :param device:
-    #     :param component_type:
-    #     """
-    #     pass
-    #
-    # def _edit_components(self, device: str):
-    #     """
-    #
-    #     :param device:
-    #     """
-    #     pass
-    #
-    # def _delete_components(self, device: str, component: str):
-    #     """
-    #
-    #     :param device:
-    #     :param component:
-    #     """
-    #     pass
-    #
-    # def _get_port_stats_by_port_hostname(self, device: str, interface_name: str):
-    #     """
-    #
-    #     :param device:
-    #     :param interface_name:
-    #     """
-    #     pass
-    #
-    # def _get_graph_by_port_hostname(
-    #     self, device: str, interface_name: str, port_type: str
-    # ):
-    #     """
-    #
-    #     :param device:
-    #     :param interface_name:
-    #     :param port_type:
-    #     """
-    #     pass
+    def get_port_stack(self, device: str):
+        """
+        Get a list of port mappings for a device.
+        This is useful for showing physical ports that are in a virtual port-channel.
+
+        :param device: Can be either the device hostname or ID
+        """
+        return get(
+            f"{self.url}/{device}/port_stack", headers=self.headers, verify=self.verify
+        )
+
+    def get_components(  # pylint: disable=R0913
+        self,
+        device: str,
+        filter_type: str = None,
+        component_id: int = None,
+        label=None,
+        status=None,
+        disabled=None,
+        ignore=None,
+    ):
+        """
+        Get a list of components for a particular device.
+
+        :param device: Can be either the device hostname or ID
+        :param filter_type: Filter the result by type (Equals)
+        :param component_id: Filter the result by id (Equals)
+        :param label: Filter the result by label (Contains)
+        :param status: Filter the result by status (Equals)
+        :param disabled: Filter the result by disabled (Equals)
+        :param ignore: Filter the result by ignore (Equals)
+        """
+        parameters = dict(
+            {
+                "type": filter_type,
+                "id": component_id,
+                "label": label,
+                "status": status,
+                "disabled": disabled,
+                "ignore": ignore,
+            }
+        )
+        return get(
+            f"{self.url}/{device}/components",
+            parameters,
+            headers=self.headers,
+            verify=self.verify,
+        )
+
+    def add_components(self, device: str, component_type: str):
+        """
+        Create a new component of a type on a particular device.
+
+        :param device: Can be either the device hostname or ID
+        :param component_type: Type of component to add
+        """
+        return post(
+            f"{self.url}/{device}/components/{component_type}",
+            headers=self.headers,
+            verify=self.verify,
+        )
+
+    def edit_components(  # pylint: disable=R0913
+        self,
+        device: str,
+        component_id: int,
+        component_type: str = None,
+        label: str = None,
+        status: int = None,
+        ignore: int = None,
+        disabled: int = None,
+        error: str = None,
+    ):
+        """
+        Edit an existing component on a particular device.
+
+        :param device: Can be either the decice hostname or ID
+        :param component_id:
+        :param component_type:
+        :param label:
+        :param status:
+        :param ignore:
+        :param disabled:
+        :param error:
+        """
+        data = dict(
+            {
+                component_id: {
+                    "type": component_type,
+                    "label": label,
+                    "status": status,
+                    "ignore": ignore,
+                    "disabled": disabled,
+                    "error": error,
+                }
+            }
+        )
+        return put(
+            f"{self.url}/{device}/components",
+            data,
+            headers=self.headers,
+            verify=self.verify,
+        )
+
+    def delete_components(self, device: str, component: int):
+        """
+        Delete an existing component on a particular device.
+
+        :param device: Can be either the device hostname or ID
+        :param component: Component ID to be deleted
+        """
+        return delete(
+            f"{self.url}/{device}/components/{component}",
+            headers=self.headers,
+            verify=self.verify,
+        )
+
+    def get_port_stats_by_port_hostname(
+        self, device: str, interface_name: str, columns: str = None
+    ):
+        """
+        Get information about a particular port for a device.
+
+        :param device: Can be either the device hostname or ID
+        :param interface_name: Any of the interface names for the device which can be obtained using get_port_graphs.
+        Please ensure that the ifname is urlencoded if it needs to be (i.e Gi0/1/0 would need to be urlencoded.
+        :param columns: Comma separated list of columns you want returned
+        """
+        parameters = dict({"columns": columns})
+        return get(
+            f"{self.url}/{device}/ports/{interface_name}",
+            parameters,
+            headers=self.headers,
+            verify=self.verify,
+        )
+
+    def get_graph_by_port_hostname(  # pylint: disable=R0913
+        self,
+        device: str,
+        interface_name: str,
+        port_type: str,
+        date_from: str = None,
+        date_to: str = None,
+        width: int = None,
+        height: int = None,
+        interface_description: bool = None,
+    ):
+        """
+        Get a graph of a port for a particular device.
+
+        :param device: Can be either the device hostname or ID
+        :param interface_name: Any of the interface names for the device which can be obtained using get_port_graphs.
+        Please ensure that the ifname is urlencoded if it needs to be (i.e Gi0/1/0 would need to be urlencoded.
+        :param port_type: Type is the port type you want the graph for.
+        You can request a list of ports for a device with get_port_graphs
+        :param date_from: date you would like the graph to start
+        :param date_to: date you would like the graph to end
+        :param width: graph width, defaults to 1075.
+        :param height: graph height, defaults to 300.
+        :param interface_description: Will use ifDescr to lookup the port instead of ifName when true.
+        Pass the ifDescr value you want to search as you would ifName.
+        """
+        parameters = dict(
+            {
+                "from": date_from,
+                "to": date_to,
+                "width": width,
+                "height": height,
+                "ifDescr": interface_description,
+            }
+        )
+        return get(
+            f"{self.url}/{device}/ports/{interface_name}/{port_type}",
+            parameters,
+            headers=self.headers,
+            verify=self.verify,
+        )
 
     def list_locations(self):
         """Return a list of locations."""
