@@ -581,14 +581,18 @@ class Devices(LibreNMS):  # pylint: disable=R0904
             verify=self.verify,
         )
 
-    # def _get_device_groups(self, device: str):
-    #     """
-    #     List the device groups that a device is matched on.
-    #
-    #     :param device:
-    #     """
-    #     pass
-    #
+    def get_device_groups(self, device: str):
+        """
+        List the device groups that a device is matched on.
+
+        :param device: Can be either the device hostname or ID
+        """
+        return get(
+            f"{self.url}/{device}/groups",
+            headers=self.headers,
+            verify=self.verify,
+        )
+
     # def _search_oxidized(self, search_string: str):
     #     """
     #     Search all oxidized device configs for a string.
