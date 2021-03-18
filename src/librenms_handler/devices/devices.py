@@ -353,7 +353,7 @@ class Devices(LibreNMS):  # pylint: disable=R0904
         :param device: Can be either the device hostname or ID
         :param component: Component ID to be deleted
         """
-        delete(
+        return delete(
             f"{self.url}/{device}/components/{component}",
             headers=self.headers,
             verify=self.verify,
