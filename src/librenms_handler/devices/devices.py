@@ -99,6 +99,37 @@ class Devices(LibreNMS):
             f"{self.url}/{device}/health", headers=self.headers, verify=self.verify
         )
 
+    def list_available_wireless_graphs(
+        self, device: str, wireless_type: str = None, sensor_id: int = None
+    ):
+        """
+        This function allows to do three things:
+         - Get a list of overall wireless graphs available.
+         - Get a list of wireless graphs based on provided class.
+         - Get the wireless sensors information based on ID.
+
+        :param device: Can be either device hostname or ID
+        :param wireless_type: Optional wireless type / wireless class
+        :param sensor_id:a Optional sensor ID to retrieve specific information
+        """
+        if wireless_type:
+            if sensor_id:
+                return get(
+                    f"{self.url}/{device}/wireless/{wireless_type}/{sensor_id}",
+                    headers=self.headers,
+                    verify=self.verify,
+                )
+            return get(
+                f"{self.url}/{device}/wireless/{wireless_type}",
+                headers=self.headers,
+                verify=self.verify,
+            )
+        return get(
+            f"{self.url}/{device}/wireless",
+            headers=self.headers,
+            verify=self.verify,
+        )
+
     def get_health_graph(self, device: str, health_type: str, sensor_id: int = None):
         """
         Get a particular health class graph for a device.
