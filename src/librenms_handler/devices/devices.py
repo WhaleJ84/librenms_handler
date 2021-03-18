@@ -1,5 +1,5 @@
 """Includes all the methods available to the Devices endpoint."""
-from requests import delete, get, post, put
+from requests import delete, get, patch, post, put
 
 from librenms_handler import LibreNMS
 
@@ -528,68 +528,130 @@ class Devices(LibreNMS):  # pylint: disable=R0904
         )
         return post(self.url, json=data, headers=self.headers, verify=self.verify)
 
-    # def _list_oxidized(self, device: str):
-    #     """
-    #     List devices for use with Oxidized.
-    #     If you have group support enabled then a group will also be returned based on your config.
-    #
-    #     :param device:
-    #     """
-    #     pass
-    #
-    # def _update_device_field(self, device: str):
-    #     """
-    #     Updates devices field in the database.
-    #
-    #     :param device:
-    #     """
-    #     pass
-    #
-    # def _rename_device(self, device: str, new_hostname: str):
-    #     """
-    #     Rename device.
-    #
-    #     :param device:
-    #     :param new_hostname:
-    #     """
-    #     pass
-    #
-    # def _get_device_groups(self, device: str):
-    #     """
-    #     List the device groups that a device is matched on.
-    #
-    #     :param device:
-    #     """
-    #     pass
-    #
-    # def _search_oxidized(self, search_string: str):
-    #     """
-    #     Search all oxidized device configs for a string.
-    #
-    #     :param search_string:
-    #     """
-    #     pass
-    #
-    # def _get_oxidized_config(self, device_name: str):
-    #     """
-    #     Returns a specific device's config from oxidized.
-    #
-    #     :param device_name:
-    #     """
-    #     pass
-    #
-    # def _add_parents_to_host(self, device: str):
-    #     """
-    #     Add one or more parents to host.
-    #
-    #     :param device:
-    #     """
-    #     pass
-    #
-    # def _delete_parents_from_host(self, device: str):
-    #     """
-    #     Deletes some or all of the parents from a host.
-    #
-    #     :param device:
-    #     """
-    #     pass
+    def list_oxidized(self, device: str = None):
+        """
+        List devices for use with Oxidized.
+        If you have group support enabled then a group will also be returned based on your config.
+
+        :param device: Can be either the device hostname or ID
+        """
+        if device:
+            return get(
+                f"{self.base_url}/api/v0/oxidized/{device}",
+                headers=self.headers,
+                verify=self.verify,
+            )
+        return get(
+            f"{self.base_url}/api/v0/oxidized",
+            headers=self.headers,
+            verify=self.verify,
+        )
+
+    def update_device_field(self, device: str, field=None, data=None):
+        """
+        Updates devices field in the database.
+
+        :param device: Can be either the device hostname or ID
+        :param field: Column name within the database (can be an array of fields)
+        :param data: Data to update the column with (can be an array of data)
+        """
+        data = dict(
+            {
+                "field": field,
+                "data": data,
+            }
+        )
+        return patch(
+            f"{self.url}/{device}",
+            json=data,
+            headers=self.headers,
+            verify=self.verify,
+        )
+
+    def rename_device(self, device: str, new_hostname: str):
+        """
+        Rename device.
+
+        :param device: Can be either the device hostname or ID
+        :param new_hostname: New hostname for the device
+        """
+        return patch(
+            f"{self.url}/{device}/rename/{new_hostname}",
+            headers=self.headers,
+            verify=self.verify,
+        )
+
+    def get_device_groups(self, device: str):
+        """
+        List the device groups that a device is matched on.
+
+        :param device: Can be either the device hostname or ID
+        """
+        return get(
+            f"{self.url}/{device}/groups",
+            headers=self.headers,
+            verify=self.verify,
+        )
+
+    def search_oxidized(self, search_string: str):
+        """
+        Search all oxidized device configs for a string.
+
+        :param search_string: The Specific string you would like to search for
+        """
+        return get(
+            f"{self.base_url}/api/v0/oxidized/config/search/{search_string}",
+            headers=self.headers,
+            verify=self.verify,
+        )
+
+    def get_oxidized_config(self, device_name: str):
+        """
+        Returns a specific device's config from oxidized.
+
+        :param device_name: The full DNS name of the device used when adding the device to LibreNMS
+        """
+        return get(
+            f"{self.base_url}/api/v0/oxidized/config/{device_name}",
+            headers=self.headers,
+            verify=self.verify,
+        )
+
+    def add_parents_to_host(self, device: str, parent_ids):
+        """
+        Add one or more parents to host.
+
+        :param device: Can be either the device hostname or ID
+        :param parent_ids: One or more parent IDs or hostnames
+        """
+        data = dict(
+            {
+                "parent_ids": parent_ids,
+            }
+        )
+        return post(
+            f"{self.url}/{device}/parents",
+            json=data,
+            headers=self.headers,
+            verify=self.verify,
+        )
+
+    def delete_parents_from_host(self, device: str, parent_ids=None):
+        """
+        Deletes some or all of the parents from a host.
+
+        :param device: Can be either the device hostname or ID
+        :param parent_ids: One or more parent IDs or hostnames.
+        If not specified deletes all parents from host.
+        """
+        data = dict(
+            {
+                "parent_ids": parent_ids,
+            }
+        )
+        return delete(
+            f"{self.url}/{device}/parents",
+            data=data,
+            headers=self.headers,
+            verify=self.verify,
+        )
