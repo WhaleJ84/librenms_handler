@@ -605,14 +605,18 @@ class Devices(LibreNMS):  # pylint: disable=R0904
             verify=self.verify,
         )
 
-    # def _get_oxidized_config(self, device_name: str):
-    #     """
-    #     Returns a specific device's config from oxidized.
-    #
-    #     :param device_name:
-    #     """
-    #     pass
-    #
+    def get_oxidized_config(self, device_name: str):
+        """
+        Returns a specific device's config from oxidized.
+
+        :param device_name: The full DNS name of the device used when adding the device to LibreNMS
+        """
+        return get(
+            f"{self.base_url}/api/v0/oxidized/config/{device_name}",
+            headers=self.headers,
+            verify=self.verify,
+        )
+
     # def _add_parents_to_host(self, device: str):
     #     """
     #     Add one or more parents to host.
