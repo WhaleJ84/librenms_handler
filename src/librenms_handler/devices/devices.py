@@ -636,10 +636,22 @@ class Devices(LibreNMS):  # pylint: disable=R0904
             verify=self.verify,
         )
 
-    # def _delete_parents_from_host(self, device: str):
-    #     """
-    #     Deletes some or all of the parents from a host.
-    #
-    #     :param device:
-    #     """
-    #     pass
+    def delete_parents_from_host(self, device: str, parent_ids=None):
+        """
+        Deletes some or all of the parents from a host.
+
+        :param device: Can be either the device hostname or ID
+        :param parent_ids: One or more parent IDs or hostnames.
+        If not specified deletes all parents from host.
+        """
+        data = dict(
+            {
+                "parent_ids": parent_ids,
+            }
+        )
+        return delete(
+            f"{self.url}/{device}/parents",
+            data=data,
+            headers=self.headers,
+            verify=self.verify,
+        )
