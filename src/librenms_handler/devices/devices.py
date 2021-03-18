@@ -359,14 +359,25 @@ class Devices(LibreNMS):  # pylint: disable=R0904
             verify=self.verify,
         )
 
-    # def _get_port_stats_by_port_hostname(self, device: str, interface_name: str):
-    #     """
-    #
-    #     :param device:
-    #     :param interface_name:
-    #     """
-    #     pass
-    #
+    def get_port_stats_by_port_hostname(
+        self, device: str, interface_name: str, columns: str = None
+    ):
+        """
+        Get information about a particular port for a device.
+
+        :param device: Can be either the device hostname or ID
+        :param interface_name: Any of the interface names for the device which can be obtained using get_port_graphs.
+        Please ensure that the ifname is urlencoded if it needs to be (i.e Gi0/1/0 would need to be urlencoded.
+        :param columns: Comma separated list of columns you want returned
+        """
+        parameters = dict({"columns": columns})
+        return get(
+            f"{self.url}/{device}/ports/{interface_name}",
+            parameters,
+            headers=self.headers,
+            verify=self.verify,
+        )
+
     # def _get_graph_by_port_hostname(
     #     self, device: str, interface_name: str, port_type: str
     # ):
