@@ -617,14 +617,25 @@ class Devices(LibreNMS):  # pylint: disable=R0904
             verify=self.verify,
         )
 
-    # def _add_parents_to_host(self, device: str):
-    #     """
-    #     Add one or more parents to host.
-    #
-    #     :param device:
-    #     """
-    #     pass
-    #
+    def add_parents_to_host(self, device: str, parent_ids):
+        """
+        Add one or more parents to host.
+
+        :param device: Can be either the device hostname or ID
+        :param parent_ids: One or more parent IDs or hostnames
+        """
+        data = dict(
+            {
+                "parent_ids": parent_ids,
+            }
+        )
+        return post(
+            f"{self.url}/{device}/parents",
+            json=data,
+            headers=self.headers,
+            verify=self.verify,
+        )
+
     # def _delete_parents_from_host(self, device: str):
     #     """
     #     Deletes some or all of the parents from a host.
