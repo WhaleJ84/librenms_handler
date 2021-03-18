@@ -1,5 +1,5 @@
 """Includes all the methods available to the Devices endpoint."""
-from requests import delete, get, post, put
+from requests import delete, get, patch, post, put
 
 from librenms_handler import LibreNMS
 
@@ -547,14 +547,27 @@ class Devices(LibreNMS):  # pylint: disable=R0904
             verify=self.verify,
         )
 
-    # def _update_device_field(self, device: str):
-    #     """
-    #     Updates devices field in the database.
-    #
-    #     :param device:
-    #     """
-    #     pass
-    #
+    def update_device_field(self, device: str, field=None, data=None):
+        """
+        Updates devices field in the database.
+
+        :param device: Can be either the device hostname or ID
+        :param field: Column name within the database (can be an array of fields)
+        :param data: Data to update the column with (can be an array of data)
+        """
+        data = dict(
+            {
+                "field": field,
+                "data": data,
+            }
+        )
+        return patch(
+            f"{self.url}/{device}",
+            json=data,
+            headers=self.headers,
+            verify=self.verify,
+        )
+
     # def _rename_device(self, device: str, new_hostname: str):
     #     """
     #     Rename device.
