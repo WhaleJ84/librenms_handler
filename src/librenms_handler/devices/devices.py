@@ -528,15 +528,25 @@ class Devices(LibreNMS):  # pylint: disable=R0904
         )
         return post(self.url, json=data, headers=self.headers, verify=self.verify)
 
-    # def _list_oxidized(self, device: str):
-    #     """
-    #     List devices for use with Oxidized.
-    #     If you have group support enabled then a group will also be returned based on your config.
-    #
-    #     :param device:
-    #     """
-    #     pass
-    #
+    def list_oxidized(self, device: str = None):
+        """
+        List devices for use with Oxidized.
+        If you have group support enabled then a group will also be returned based on your config.
+
+        :param device: Can be either the device hostname or ID
+        """
+        if device:
+            return get(
+                f"{self.base_url}/api/v0/oxidized/{device}",
+                headers=self.headers,
+                verify=self.verify,
+            )
+        return get(
+            f"{self.base_url}/api/v0/oxidized",
+            headers=self.headers,
+            verify=self.verify,
+        )
+
     # def _update_device_field(self, device: str):
     #     """
     #     Updates devices field in the database.
