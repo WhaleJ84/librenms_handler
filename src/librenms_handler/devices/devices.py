@@ -291,14 +291,19 @@ class Devices(LibreNMS):
             verify=self.verify,
         )
 
-    # def _add_components(self, device: str, component_type: str):
-    #     """
-    #
-    #     :param device:
-    #     :param component_type:
-    #     """
-    #     pass
-    #
+    def add_components(self, device: str, component_type: str):
+        """
+        Create a new component of a type on a particular device.
+
+        :param device: Can be either the device hostname or ID
+        :param component_type: Type of component to add
+        """
+        return post(
+            f"{self.url}/{device}/components/{component_type}",
+            headers=self.headers,
+            verify=self.verify,
+        )
+
     # def _edit_components(self, device: str):
     #     """
     #
