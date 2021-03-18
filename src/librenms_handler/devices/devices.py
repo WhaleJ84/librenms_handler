@@ -242,13 +242,17 @@ class Devices(LibreNMS):
         """
         return get(f"{self.url}/{device}/ip", headers=self.headers, verify=self.verify)
 
-    # def _get_port_stack(self, device: str):
-    #     """
-    #
-    #     :param device:
-    #     """
-    #     pass
-    #
+    def get_port_stack(self, device: str):
+        """
+        Get a list of port mappings for a device.
+        This is useful for showing physical ports that are in a virtual port-channel.
+
+        :param device: Can be either the device hostname or ID
+        """
+        return get(
+            f"{self.url}/{device}/port_stack", headers=self.headers, verify=self.verify
+        )
+
     # def _get_components(self, device: str):
     #     """
     #
