@@ -346,14 +346,19 @@ class Devices(LibreNMS):  # pylint: disable=R0904
             verify=self.verify,
         )
 
-    # def _delete_components(self, device: str, component: str):
-    #     """
-    #
-    #     :param device:
-    #     :param component:
-    #     """
-    #     pass
-    #
+    def delete_components(self, device: str, component: int):
+        """
+        Delete an existing component on a particular device.
+
+        :param device: Can be either the device hostname or ID
+        :param component: Component ID to be deleted
+        """
+        delete(
+            f"{self.url}/{device}/components/{component}",
+            headers=self.headers,
+            verify=self.verify,
+        )
+
     # def _get_port_stats_by_port_hostname(self, device: str, interface_name: str):
     #     """
     #
