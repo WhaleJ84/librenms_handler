@@ -593,14 +593,18 @@ class Devices(LibreNMS):  # pylint: disable=R0904
             verify=self.verify,
         )
 
-    # def _search_oxidized(self, search_string: str):
-    #     """
-    #     Search all oxidized device configs for a string.
-    #
-    #     :param search_string:
-    #     """
-    #     pass
-    #
+    def search_oxidized(self, search_string: str):
+        """
+        Search all oxidized device configs for a string.
+
+        :param search_string: The Specific string you would like to search for
+        """
+        return get(
+            f"{self.base_url}/api/v0/oxidized/config/search/{search_string}",
+            headers=self.headers,
+            verify=self.verify,
+        )
+
     # def _get_oxidized_config(self, device_name: str):
     #     """
     #     Returns a specific device's config from oxidized.
