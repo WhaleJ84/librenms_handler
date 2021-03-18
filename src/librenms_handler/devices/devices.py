@@ -253,13 +253,44 @@ class Devices(LibreNMS):
             f"{self.url}/{device}/port_stack", headers=self.headers, verify=self.verify
         )
 
-    # def _get_components(self, device: str):
-    #     """
-    #
-    #     :param device:
-    #     """
-    #     pass
-    #
+    def get_components(  # pylint: disable=R0913
+        self,
+        device: str,
+        filter_type: str = None,
+        component_id: int = None,
+        label=None,
+        status=None,
+        disabled=None,
+        ignore=None,
+    ):
+        """
+        Get a list of components for a particular device.
+
+        :param device: Can be either the device hostname or ID
+        :param filter_type: Filter the result by type (Equals)
+        :param component_id: Filter the result by id (Equals)
+        :param label: Filter the result by label (Contains)
+        :param status: Filter the result by status (Equals)
+        :param disabled: Filter the result by disabled (Equals)
+        :param ignore: Filter the result by ignore (Equals)
+        """
+        parameters = dict(
+            {
+                "type": filter_type,
+                "id": component_id,
+                "label": label,
+                "status": status,
+                "disabled": disabled,
+                "ignore": ignore,
+            }
+        )
+        return get(
+            f"{self.url}/{device}/components",
+            parameters,
+            headers=self.headers,
+            verify=self.verify,
+        )
+
     # def _add_components(self, device: str, component_type: str):
     #     """
     #
