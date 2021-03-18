@@ -8,9 +8,7 @@ requests = "*"
 
 [dev-packages]
 pylint = "*"
-black = "*"
-twine = "*"
-build = "*"
+black = "==20.8b1"
 setuptools = "*"
 
 [requires]
