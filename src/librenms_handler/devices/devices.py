@@ -568,15 +568,19 @@ class Devices(LibreNMS):  # pylint: disable=R0904
             verify=self.verify,
         )
 
-    # def _rename_device(self, device: str, new_hostname: str):
-    #     """
-    #     Rename device.
-    #
-    #     :param device:
-    #     :param new_hostname:
-    #     """
-    #     pass
-    #
+    def rename_device(self, device: str, new_hostname: str):
+        """
+        Rename device.
+
+        :param device: Can be either the device hostname or ID
+        :param new_hostname: New hostname for the device
+        """
+        return patch(
+            f"{self.url}/{device}/rename/{new_hostname}",
+            headers=self.headers,
+            verify=self.verify,
+        )
+
     # def _get_device_groups(self, device: str):
     #     """
     #     List the device groups that a device is matched on.
