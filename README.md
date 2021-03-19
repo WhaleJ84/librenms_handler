@@ -25,7 +25,7 @@ The package is installed with the following package managers like so:
 
 `pipenv install librenms-handler`
 
-The following statement will initialise the library:
+The following statement will initialise the chosen endpoint:
 
 ```python
 from librenms_handler.devices import Devices
@@ -49,6 +49,8 @@ Upon operation, the method will execute and return the required request to your 
 ```
 
 The output is exactly the same as if you were using Curl to make the requests.
+
+Should you wish to use any other endpoint, the situation would be the same: `from librenms_handler.endpoint import Endpoint`
 
 ## Environment variables
 
@@ -80,7 +82,7 @@ See [Projects](https://github.com/WhaleJ84/librenms_handler/projects) to track t
 | Routing       | False   |       |
 | Services      | False   |       |
 | Switching     | False   |       |
-| System        | False   |       |
+| System        | True    | True  |
 
 ## Collaboration
 
