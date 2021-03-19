@@ -75,7 +75,7 @@ See [Projects](https://github.com/WhaleJ84/librenms_handler/projects) to track t
 | Device Groups | False   |       |
 | Devices       | True    | True  |
 | Inventory     | False   |       |
-| Locations     | False   |       |
+| Locations     | True    | True  |
 | Logs          | False   |       |
 | Port Groups   | False   |       |
 | Ports         | False   |       |
