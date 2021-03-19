@@ -72,7 +72,7 @@ See [Projects](https://github.com/WhaleJ84/librenms_handler/projects) to track t
 | Alerts        | False   |       |
 | ARP           | True    | True  |
 | Bills         | False   |       |
-| Device Groups | False   |       |
+| Device Groups | True    | True  |
 | Devices       | True    | True  |
 | Inventory     | True    | True  |
 | Locations     | True    | True  |
