@@ -70,7 +70,7 @@ See [Projects](https://github.com/WhaleJ84/librenms_handler/projects) to track t
 | Endpoint      | Started | Done  |
 | ------------- | ------- | ----- |
 | Alerts        | False   |       |
-| ARP           | False   |       |
+| ARP           | True    | True  |
 | Bills         | False   |       |
 | Device Groups | False   |       |
 | Devices       | True    | True  |
