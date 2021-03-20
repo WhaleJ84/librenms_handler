@@ -65,24 +65,24 @@ The handler first checks for the following environment variables, should you cho
 ## Endpoints
 
 While I will likely never have reason to fully complete all endpoints, the progress of such is shown below:
-See [Projects](https://github.com/WhaleJ84/librenms_handler/projects) to track the progress of the endpoints.
+See [Projects](https://github.com/WhaleJ84/librenms_handler/projects) to track the progress of the endpoints or select individual ones below.
 
-| Endpoint      | Started | Done  |
-| ------------- | ------- | ----- |
-| Alerts        | False   |       |
-| ARP           | True    | True  |
-| Bills         | False   |       |
-| Device Groups | True    | True  |
-| Devices       | True    | True  |
-| Inventory     | True    | True  |
-| Locations     | True    | True  |
-| Logs          | True    | True  |
-| Port Groups   | False   |       |
-| Ports         | False   |       |
-| Routing       | False   |       |
-| Services      | False   |       |
-| Switching     | False   |       |
-| System        | True    | True  |
+| Endpoint                                                                 | Started | Done  |
+| ------------------------------------------------------------------------ | ------- | ----- |
+| [Alerts](https://github.com/WhaleJ84/librenms_handler/projects/5)        | False   |       |
+| [ARP](https://github.com/WhaleJ84/librenms_handler/projects/10)          | True    | True  |
+| [Bills](https://github.com/WhaleJ84/librenms_handler/projects/9)         | False   |       |
+| [Device Groups](https://github.com/WhaleJ84/librenms_handler/projects/2) | True    | True  |
+| [Devices](https://github.com/WhaleJ84/librenms_handler/projects/1)       | True    | True  |
+| [Inventory](https://github.com/WhaleJ84/librenms_handler/projects/8)     | True    | True  |
+| [Locations](https://github.com/WhaleJ84/librenms_handler/projects/14)    | True    | True  |
+| [Logs](https://github.com/WhaleJ84/librenms_handler/projects/13)         | True    | True  |
+| [Port Groups](https://github.com/WhaleJ84/librenms_handler/projects/4)   | False   |       |
+| [Ports](https://github.com/WhaleJ84/librenms_handler/projects/3)         | False   |       |
+| [Routing](https://github.com/WhaleJ84/librenms_handler/projects/6)       | False   |       |
+| [Services](https://github.com/WhaleJ84/librenms_handler/projects/11)     | False   |       |
+| [Switching](https://github.com/WhaleJ84/librenms_handler/projects/7)     | False   |       |
+| [System](https://github.com/WhaleJ84/librenms_handler/projects/12)       | True    | True  | 
 
 ## Collaboration
 
