@@ -8,8 +8,8 @@ requests = "*"
 
 [dev-packages]
 bandit = "*"
+black = "==21.7b0"
 pylint = "*"
-black = "==20.8b1"
 setuptools = "*"
 
 [requires]
