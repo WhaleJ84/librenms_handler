@@ -1,0 +1,31 @@
+name: Bandit
+'on':
+  pull_request:
+  push:
+    branches:
+      - main
+      - ci-test
+jobs:
+  test:
+    name: Bandit
+    runs-on: ubuntu-latest
+    strategy:
+      matrix:
+        distro:
+          - ubuntu2004
+
+    steps:
+      - name: Checkout code
+        uses: actions/checkout@v2
+
+      - name: Set up Python3
+        uses: actions/setup-python@v2
+        with:
+          python-version: '3.x'
+
+      - name: Install requirements
+        run: |
+          pip install requests bandit
+
+      - name: Run bandit
+        run: bandit -r src/librenms_handler
