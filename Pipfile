@@ -10,7 +10,6 @@ requests = "*"
 bandit = "*"
 black = "==21.7b0"
 pylint = "*"
-setuptools = "*"
 
 [requires]
 python_version = "3.8"
