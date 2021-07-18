@@ -3,7 +3,7 @@
 [![PyPI](https://img.shields.io/pypi/v/librenms-handler.svg)](https://pypi.python.org/pypi/librenms-handler)
 [![image](https://img.shields.io/pypi/pyversions/librenms-handler.svg)](https://python.org/pypi/librenms-handler)
 [![Black](https://img.shields.io/badge/code%20style-black-000000.svg)](https://github.com/psf/black)
-[![Pylint](https://github.com/WhaleJ84/librenms_handler/workflows/Pylint/badge.svg)](https://github.com/WhaleJ84/librenms-handler/actions?query=workflow%3APylint)
+[![Bandit](https://github.com/WhaleJ84/librenms_handler/actions/workflows/bandit.yml/badge.svg)](https://github.com/WhaleJ84/librenms_handler/actions/workflows/bandit.yml)
 [![CodeQL](https://github.com/WhaleJ84/librenms_handler/actions/workflows/codeql-analysis.yml/badge.svg)](https://github.com/WhaleJ84/librenms_handler/actions/workflows/codeql-analysis.yml)
 
 A Python library to interact with the LibreNMS API (v0).
@@ -30,7 +30,7 @@ The following statement will initialise the chosen endpoint:
 ```python
 from librenms_handler.devices import Devices
 
-librenms_devices = Devices(
+devices = Devices(
     'https://librenms.example.com',
     'e4ef9234abab59a90628dd3f616a60b4'
 )
@@ -38,13 +38,13 @@ librenms_devices = Devices(
 
 **NOTE:** If you are using a self-signed certificate for your server, you can bypass the errors by passing the initialisation option `verify=False`.
 
-Once done, a list of methods will be available to you such as `librenms_handler.list_devices()`.
+Once done, a list of methods will be available to you such as `devices.list_devices()`.
 Upon operation, the method will execute and return the required request to your LibreNMS instance.
 
 ```
->>> librenms_devices.add_device('test_device', snmp_disable=True, force_add=True)
+>>> devices.add_device('test_device', snmp_disable=True, force_add=True)
 {'status': 'ok', 'message': 'Device test_device (13) has been added successfully'}
->>> librenms_devices.del_device('test')
+>>> devices.del_device('test')
 {'status': 'ok', 'devices': [{'device_id': 13, 'inserted': '2021-03-13 15:56:19', 'hostname': 'test_device', 'sysName': '', 'ip': None, 'overwrite_ip': None, 'community': '', 'authlevel': None, 'authname': None, 'authpass': None, 'authalgo': None, 'cryptopass': None, 'cryptoalgo': None, 'snmpver': 'v2c', 'port': 161, 'transport': 'udp', 'timeout': None, 'retries': None, 'snmp_disable': 1, 'bgpLocalAs': None, 'sysObjectID': None, 'sysDescr': None, 'sysContact': None, 'version': None, 'hardware': '', 'features': None, 'location_id': None, 'os': 'ping', 'status': True, 'status_reason': '', 'ignore': 0, 'disabled': 0, 'uptime': None, 'agent_uptime': 0, 'last_polled': None, 'last_poll_attempted': None, 'last_polled_timetaken': None, 'last_discovered_timetaken': None, 'last_discovered': None, 'last_ping': None, 'last_ping_timetaken': None, 'purpose': None, 'type': 'server', 'serial': None, 'icon': 'images/os/ping.svg', 'poller_group': 0, 'override_sysLocation': 0, 'notes': None, 'port_association_mode': 1, 'max_depth': 0, 'disable_notify': 0, 'location': None, 'lat': None, 'lng': None, 'attribs': [], 'vrf_lite_cisco': []}], 'message': 'Removed device test_device\n', 'count': 1}
 ```
 
@@ -65,24 +65,24 @@ The handler first checks for the following environment variables, should you cho
 ## Endpoints
 
 While I will likely never have reason to fully complete all endpoints, the progress of such is shown below:
-See [Projects](https://github.com/WhaleJ84/librenms_handler/projects) to track the progress of the endpoints.
+See [Projects](https://github.com/WhaleJ84/librenms_handler/projects) to track the progress of the endpoints or select individual ones below.
 
-| Endpoint      | Started | Done  |
-| ------------- | ------- | ----- |
-| Alerts        | False   |       |
-| ARP           | True    | True  |
-| Bills         | False   |       |
-| Device Groups | True    | True  |
-| Devices       | True    | True  |
-| Inventory     | True    | True  |
-| Locations     | True    | True  |
-| Logs          | True    | True  |
-| Port Groups   | False   |       |
-| Ports         | False   |       |
-| Routing       | False   |       |
-| Services      | False   |       |
-| Switching     | False   |       |
-| System        | True    | True  |
+| Endpoint                                                                 | Started | Done  |
+| ------------------------------------------------------------------------ | ------- | ----- |
+| [Alerts](https://github.com/WhaleJ84/librenms_handler/projects/5)        | False   |       |
+| [ARP](https://github.com/WhaleJ84/librenms_handler/projects/10)          | True    | True  |
+| [Bills](https://github.com/WhaleJ84/librenms_handler/projects/9)         | False   |       |
+| [Device Groups](https://github.com/WhaleJ84/librenms_handler/projects/2) | True    | True  |
+| [Devices](https://github.com/WhaleJ84/librenms_handler/projects/1)       | True    | True  |
+| [Inventory](https://github.com/WhaleJ84/librenms_handler/projects/8)     | True    | True  |
+| [Locations](https://github.com/WhaleJ84/librenms_handler/projects/14)    | True    | True  |
+| [Logs](https://github.com/WhaleJ84/librenms_handler/projects/13)         | True    | True  |
+| [Port Groups](https://github.com/WhaleJ84/librenms_handler/projects/4)   | False   |       |
+| [Ports](https://github.com/WhaleJ84/librenms_handler/projects/3)         | False   |       |
+| [Routing](https://github.com/WhaleJ84/librenms_handler/projects/6)       | False   |       |
+| [Services](https://github.com/WhaleJ84/librenms_handler/projects/11)     | False   |       |
+| [Switching](https://github.com/WhaleJ84/librenms_handler/projects/7)     | False   |       |
+| [System](https://github.com/WhaleJ84/librenms_handler/projects/12)       | True    | True  | 
 
 ## Collaboration
 
