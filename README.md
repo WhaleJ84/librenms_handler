@@ -2,6 +2,7 @@
 
 [![PyPI](https://img.shields.io/pypi/v/librenms-handler.svg)](https://pypi.python.org/pypi/librenms-handler)
 [![image](https://img.shields.io/pypi/pyversions/librenms-handler.svg)](https://python.org/pypi/librenms-handler)
+[![Downloads](https://pepy.tech/badge/librenms-handler)](https://pepy.tech/project/librenms-handler)
 [![Black](https://img.shields.io/badge/code%20style-black-000000.svg)](https://github.com/psf/black)
 [![Bandit](https://github.com/WhaleJ84/librenms_handler/actions/workflows/bandit.yml/badge.svg)](https://github.com/WhaleJ84/librenms_handler/actions/workflows/bandit.yml)
 [![CodeQL](https://github.com/WhaleJ84/librenms_handler/actions/workflows/codeql-analysis.yml/badge.svg)](https://github.com/WhaleJ84/librenms_handler/actions/workflows/codeql-analysis.yml)
@@ -10,7 +11,7 @@ A Python library to interact with the LibreNMS API (v0).
 
 The project aims to provide the user with as much information as if they were looking at the [reference guide](https://docs.librenms.org/API/) themselves.
 
-I have not used it myself, so I cannot endorse it, but a quick search shows that [LibreNMSAPI](https://github.com/RobertH1993/LibreNMSAPI) has a similar goal with a different outlook.
+I have not used it myself so I cannot endorse it, but a quick search shows that [LibreNMSAPI](https://github.com/RobertH1993/LibreNMSAPI) has a similar goal with a different outlook.
 Consider checking it out if this project doesn't suit your needs!
 
 ## Usage
