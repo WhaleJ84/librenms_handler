@@ -5,7 +5,7 @@ with open("README.md", "r", encoding="utf-8") as fh:
 
 setup(
     name="librenms-handler",
-    version="0.3.1",
+    version="0.3.2",
     author="James Whale",
     author_email="james@james-whale.com",
     description="A Python library to interact with the LibreNMS API (v0)",
@@ -22,5 +22,8 @@ setup(
     package_dir={"": "src"},
     packages=find_packages(where="src"),
     python_requires=">=3.6",
+    install_requires=[
+        "requests",
+    ]
 )
 
