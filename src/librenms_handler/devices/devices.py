@@ -655,3 +655,23 @@ class Devices(LibreNMS):  # pylint: disable=R0904
             headers=self.headers,
             verify=self.verify,
         )
+    def maintenance_device(self, device: str, notes: str, duration: str):
+        """
+        Set a device into maintenance mode.
+
+        :param notes: Some description for the Maintenance
+        :param duration: Duration of Maintenance in format H:m
+        """
+        data = dict(
+            {
+                "notes": notes,
+                "duration": duration
+            }
+        )
+        return post(
+            f"{self.url}/{device}/maintenance",
+            json=data,
+            headers=self.headers,
+            verify=self.verify,
+        )
+ 
