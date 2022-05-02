@@ -65,29 +65,35 @@ The handler first checks for the following environment variables, should you cho
 
 ## Endpoints
 
-While I will likely never have reason to fully complete all endpoints, the progress of such is shown below:
+The progress of API endpoints are shown in their respective projects below:
 See [Projects](https://github.com/WhaleJ84/librenms_handler/projects) to track the progress of the endpoints or select individual ones below.
 
-| Endpoint                                                                 | Started | Done  |
-| ------------------------------------------------------------------------ | ------- | ----- |
-| [Alerts](https://github.com/WhaleJ84/librenms_handler/projects/5)        | False   |       |
-| [ARP](https://github.com/WhaleJ84/librenms_handler/projects/10)          | True    | True  |
-| [Bills](https://github.com/WhaleJ84/librenms_handler/projects/9)         | False   |       |
-| [Device Groups](https://github.com/WhaleJ84/librenms_handler/projects/2) | True    | True  |
-| [Devices](https://github.com/WhaleJ84/librenms_handler/projects/1)       | True    | True  |
-| [Inventory](https://github.com/WhaleJ84/librenms_handler/projects/8)     | True    | True  |
-| [Locations](https://github.com/WhaleJ84/librenms_handler/projects/14)    | True    | True  |
-| [Logs](https://github.com/WhaleJ84/librenms_handler/projects/13)         | True    | True  |
-| [Port Groups](https://github.com/WhaleJ84/librenms_handler/projects/4)   | False   |       |
-| [Ports](https://github.com/WhaleJ84/librenms_handler/projects/3)         | False   |       |
-| [Routing](https://github.com/WhaleJ84/librenms_handler/projects/6)       | False   |       |
-| [Services](https://github.com/WhaleJ84/librenms_handler/projects/11)     | False   |       |
-| [Switching](https://github.com/WhaleJ84/librenms_handler/projects/7)     | False   |       |
-| [System](https://github.com/WhaleJ84/librenms_handler/projects/12)       | True    | True  | 
+It is not possible to say when an endpoint is 'done', as they are being expanded as time goes on.
+Each function will have its own issue tracked, so you can search to see if implemented or not.
+
+| Endpoint                                                                 | Started |
+| ------------------------------------------------------------------------ | ------- |
+| [Alerts](https://github.com/WhaleJ84/librenms_handler/projects/5)        | False   |
+| [ARP](https://github.com/WhaleJ84/librenms_handler/projects/10)          | True    |
+| [Bills](https://github.com/WhaleJ84/librenms_handler/projects/9)         | False   |
+| [Device Groups](https://github.com/WhaleJ84/librenms_handler/projects/2) | True    |
+| [Devices](https://github.com/WhaleJ84/librenms_handler/projects/1)       | True    |
+| [Inventory](https://github.com/WhaleJ84/librenms_handler/projects/8)     | True    |
+| [Locations](https://github.com/WhaleJ84/librenms_handler/projects/14)    | True    |
+| [Logs](https://github.com/WhaleJ84/librenms_handler/projects/13)         | True    |
+| [Port Groups](https://github.com/WhaleJ84/librenms_handler/projects/4)   | False   |
+| [Ports](https://github.com/WhaleJ84/librenms_handler/projects/3)         | False   |
+| [Routing](https://github.com/WhaleJ84/librenms_handler/projects/6)       | False   |
+| [Services](https://github.com/WhaleJ84/librenms_handler/projects/11)     | False   |
+| [Switching](https://github.com/WhaleJ84/librenms_handler/projects/7)     | False   |
+| [System](https://github.com/WhaleJ84/librenms_handler/projects/12)       | True    | 
 
 ## Collaboration
 
 The project has no complex logic behind it - all you need to do is read the [API docs](https://docs.librenms.org/API/) and follow the existing code structure.
+Sometimes the documentation is not consistent, so providing more information in the docstring is preferred than not explaining arguments.
+
 All code should be formatted by [Black](https://github.com/psf/black) before submission and adhere to [Pylint](https://github.com/PyCQA/pylint) recommendations where reasonable.
+Linting is not absolute; functionality is the priority.
 
 By following these standards, the code should be easy for people from all skill-sets to help out!

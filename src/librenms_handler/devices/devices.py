@@ -655,10 +655,12 @@ class Devices(LibreNMS):  # pylint: disable=R0904
             headers=self.headers,
             verify=self.verify,
         )
+
     def maintenance_device(self, device: str, notes: str, duration: str):
         """
         Set a device into maintenance mode.
 
+        :param device: Can be either the device hostname or ID
         :param notes: Some description for the Maintenance
         :param duration: Duration of Maintenance in format H:m
         """
@@ -674,4 +676,3 @@ class Devices(LibreNMS):  # pylint: disable=R0904
             headers=self.headers,
             verify=self.verify,
         )
- 
