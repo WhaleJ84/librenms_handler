@@ -85,7 +85,7 @@ Each function will have its own issue tracked, so you can search to see if imple
 | [Ports](https://github.com/WhaleJ84/librenms_handler/projects/3)         | False   |
 | [Routing](https://github.com/WhaleJ84/librenms_handler/projects/6)       | False   |
 | [Services](https://github.com/WhaleJ84/librenms_handler/projects/11)     | False   |
-| [Switching](https://github.com/WhaleJ84/librenms_handler/projects/7)     | False   |
+| [Switching](https://github.com/WhaleJ84/librenms_handler/projects/7)     | True    |
 | [System](https://github.com/WhaleJ84/librenms_handler/projects/12)       | True    | 
 
 ## Collaboration
