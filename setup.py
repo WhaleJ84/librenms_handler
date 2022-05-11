@@ -20,10 +20,10 @@ setup(
         "License :: OSI Approved :: MIT License",
     ],
     package_dir={"": "src"},
-    packages=find_packages(where="src"),
+    packages=find_packages(
+        where="src",
+        include="Pipfile"
+    ),
     python_requires=">=3.6",
-    install_requires=[
-        "requests",
-    ]
 )
 
