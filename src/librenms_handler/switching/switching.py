@@ -62,8 +62,7 @@ class Switching(LibreNMS):
 
         :param mac: is the specific MAC address you would like to query
         """
-        if mac:
-            return get(
-                f"{self.url}/fdb/{mac}", headers=self.headers, verify=self.verify
-            )
-        return get(f"{self.url}/fdb", headers=self.headers, verify=self.verify)
+        if not mac:
+            mac = ''
+
+        return get(f"{self.url}/fdb/{mac}", headers=self.headers, verify=self.verify)
