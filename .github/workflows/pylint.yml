@@ -1,10 +1,10 @@
 name: Pylint
+
 'on':
   pull_request:
-  push:
-    branches:
-      - main
-      - ci-test
+    paths:
+      - '**.py'
+
 jobs:
   test:
     name: Pylint
