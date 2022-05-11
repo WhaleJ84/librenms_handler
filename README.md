@@ -87,13 +87,3 @@ Each function will have its own issue tracked, so you can search to see if imple
 | [Services](https://github.com/WhaleJ84/librenms_handler/projects/11)     | False   |
 | [Switching](https://github.com/WhaleJ84/librenms_handler/projects/7)     | True    |
 | [System](https://github.com/WhaleJ84/librenms_handler/projects/12)       | True    | 
-
-## Collaboration
-
-The project has no complex logic behind it - all you need to do is read the [API docs](https://docs.librenms.org/API/) and follow the existing code structure.
-Sometimes the documentation is not consistent, so providing more information in the docstring is preferred than not explaining arguments.
-
-All code should be formatted by [Black](https://github.com/psf/black) before submission and adhere to [Pylint](https://github.com/PyCQA/pylint) recommendations where reasonable.
-Linting is not absolute; functionality is the priority.
-
-By following these standards, the code should be easy for people from all skill-sets to help out!
