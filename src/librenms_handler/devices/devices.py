@@ -371,6 +371,7 @@ class Devices(LibreNMS):  # pylint: disable=R0904
         :param columns: Comma separated list of columns you want returned
         """
         parameters = dict({"columns": columns})
+        interface_name = interface_name.replace('/','%2F')
         return get(
             f"{self.url}/{device}/ports/{interface_name}",
             parameters,
@@ -413,6 +414,7 @@ class Devices(LibreNMS):  # pylint: disable=R0904
                 "ifDescr": interface_description,
             }
         )
+        interface_name = interface_name.replace('/','%2F')
         return get(
             f"{self.url}/{device}/ports/{interface_name}/{port_type}",
             parameters,
