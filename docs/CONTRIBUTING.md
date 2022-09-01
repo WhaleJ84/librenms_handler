@@ -4,7 +4,7 @@ Thank you for wanting to contribute to the project!
 `librenms_handler` has no complex logic behind it - all you need to do is read the [API docs](https://docs.librenms.org/API/) and follow the existing code structure.
 
 When you are ready to create a pull request for your contributions, please pull them into the `dev` branch, **not** `main`.
-Merging into stage allows me to test the code before officially including it in the PyPI package.
+Merging into dev allows me to test the code before officially including it in the PyPI package.
 
 Alongside the documentation, there are the following design considerations to follow when contributing.
 
