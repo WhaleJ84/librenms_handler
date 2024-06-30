@@ -7,7 +7,7 @@ build-backend = "setuptools.build_meta"
 
 [project]
 name = "librenms-handler"
-version = "0.4.3.b1"
+version = "0.4.3"
 authors = [
     { name="James Whale", email="james@james-whale.com" },
 ]
