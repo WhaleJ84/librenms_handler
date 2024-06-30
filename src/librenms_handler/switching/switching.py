@@ -66,3 +66,14 @@ class Switching(LibreNMS):
             mac = ''
 
         return get(f"{self.url}/fdb/{mac}", headers=self.headers, verify=self.verify)
+
+    def list_fdb_detail(self, mac: str = None):
+        """
+        Get a detailed list of all ports FDB
+
+        :param mac: is the specific MAC address you would like to query
+        """
+        if not mac:
+            mac = ''
+
+        return get(f"{self.url}/fdb/{mac}/detail", headers=self.headers, verify=self.verify)
